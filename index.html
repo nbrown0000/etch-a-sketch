@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Etch-A-Sketch</h1>
+  </header>
+
+  <main id="main">
+      <div id="settings">
+        <input type="color" id="color-picker" name="color-picker" value="#2986cc" >
+        <button id="color-button" class="btn">Color</button>
+        <button id="rainbow-button" class="btn">Rainbow</button>
+        <button id="greyscale-button" class="btn">Greyscale</button>
+        <button id="eraser-button" class="btn">Eraser</button>
+        <input type= "range" id="grid-size" name="grid-size" value="24" min="8" max="96" step="8" onchange="updateRange(this.value)">
+        <input type="text" id="rangeValue" value="">
+        <button id="clear-button" class="btn">Clear</button>
+      </div>
+  
+      <div id="grid-container"></div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/nbrown0000">
+      nbrown0000
+      <img id="github-logo" src="img/github-logo.png">
+    </a>
+  </footer>
+  
+</body>
+</html>

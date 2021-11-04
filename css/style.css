@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #404040;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  color: #333333;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+header h1 {
+  color: #e5e5e5;
+  font-size: 4em;
+}
+
+#main {
+  display: flex;
+}
+
+#grid-container {
+  background-color: white;
+}
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 50px;
+}
+
+#settings > button {
+  margin: 10px;
+}
+
+.btn {
+  width: 100px;
+  padding: 8px;
+  border-radius: 5px;
+  color: #FFF;
+  font-size: 20px;
+  border: none;
+  font-size: 1em;
+  background: none;
+  border: 1px solid #a9ceea;
+  color:#a9ceea;
+  transition: all .2s ease-in-out;
+}
+.btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+input:hover {
+  cursor: pointer;
+}
+input[id=color-picker] {
+  margin-bottom: 10px;
+  width: 100px;
+}
+input[id=grid-size] {
+  width: 100px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: #a9ceea;
+}
+input[id=rangeValue] {
+  background: none;
+  border: none;
+  width: 100px;
+  text-align: center;
+  color: #a9ceea;
+  font-size: 1em;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+footer {
+  width: 100%;
+  margin-top: auto;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #e5e5e5;
+  padding: 5px;
+}
+
+#github-logo {
+  width: 30px;
+  margin: 5px;
+}
+
+.active {
+  background-color: #a9ceea;
+  color: #000;
+}
