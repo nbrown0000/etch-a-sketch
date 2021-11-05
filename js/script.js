@@ -8,6 +8,7 @@ const colorButton = document.querySelector('#color-button');
 const rainbowButton = document.querySelector('#rainbow-button');
 const greyscaleButton = document.querySelector('#greyscale-button');
 const eraserButton = document.querySelector('#eraser-button');
+const sizeSlider = document.querySelector('#grid-size');
 const clearButton = document.querySelector('#clear-button');
 
 colorPicker.addEventListener('change', (e) => setCurrentColor(e.target.value))
@@ -15,6 +16,7 @@ colorButton.addEventListener('click', () => setCurrentMode('color'));
 rainbowButton.addEventListener('click', () => setCurrentMode('rainbow'));
 greyscaleButton.addEventListener('click', () => setCurrentMode('greyscale'));
 eraserButton.addEventListener('click', () => setCurrentMode('eraser'));
+sizeSlider.addEventListener('change', (e) => changeGridSize(e.target.value))
 clearButton.addEventListener('click', clearGrid)
 
 function mouseEnter(e) {
@@ -39,20 +41,17 @@ function draw(e) {
     let rgbArray;
     let alpha;
     if (bgColor.slice(0,4) === 'rgba') {
-      // console.log('rgba');
       rgbArray = bgColor.slice(5,-1).split(",").map(n => parseFloat(n));
-      // console.log('rgba: ' + rgbArray)
     }
     else if (bgColor.slice(0,3) === 'rgb') {
-      // console.log('rgb');
       rgbArray = bgColor.slice(4,-1).split(",").map(n => parseFloat(n));
-      // console.log('rgb: ' + rgbArray)
     }
 
     if (rgbArray[0]===255) {
       alpha = 0.1;
     }
     else if (rgbArray[3] < 1.0) {
+      // bg is lighter grey than black
       alpha = rgbArray[3] + 0.1;
     }
     else if (rgbArray[3] < 1.0) {
@@ -60,6 +59,7 @@ function draw(e) {
       alpha = alpha = 0.1;
     }
     else {
+      // bg is black
       alpha = 1.0;
     }
 
@@ -118,9 +118,18 @@ function clearGrid() {
 }
 
 function initilizeGrid(size = 24) {
+  
   updateRange(size);
-  let grid = createGrid(size);
-  gridContainer.appendChild(grid);
+  let currentGrid = document.querySelector('.grid')
+  if (currentGrid !== null) {
+    gridContainer.removeChild(currentGrid);
+  }
+  let newGrid = createGrid(size);
+  gridContainer.appendChild(newGrid);
+}
+
+function changeGridSize(newSize) {
+  initilizeGrid(newSize)
 }
 
 function updateRange(val) {
