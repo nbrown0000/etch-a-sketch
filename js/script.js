@@ -47,20 +47,26 @@ function draw(e) {
       rgbArray = bgColor.slice(4,-1).split(",").map(n => parseFloat(n));
     }
 
-    if (rgbArray[0]===255) {
+    if (rgbArray[0]===255 && rgbArray[1]===255 && rgbArray[2]===255) {
+      // bg is white
       alpha = 0.1;
     }
-    else if (rgbArray[3] < 1.0) {
-      // bg is lighter grey than black
-      alpha = rgbArray[3] + 0.1;
-    }
-    else if (rgbArray[3] < 1.0) {
-      // bg is greyscale
-      alpha = alpha = 0.1;
+    else if (rgbArray[0]===0 && rgbArray[1]===0 && rgbArray[2]===0) {
+      if (rgbArray[3] < 1.0) {
+        // bg is lighter grey than black
+        alpha = rgbArray[3] + 0.1;
+      }
+      else if (rgbArray[3] < 1.0) {
+        // bg is greyscale
+        alpha = alpha = 0.1;
+      }
+      else {
+        // bg is black
+        alpha = 1.0;
+      }
     }
     else {
-      // bg is black
-      alpha = 1.0;
+      alpha = 0.1;
     }
 
     e.target.style.backgroundColor = `rgba(0,0,0,${alpha})`;
