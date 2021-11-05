@@ -36,18 +36,31 @@ function draw(e) {
   }
   else if (currentMode === 'greyscale') {
     let bgColor = e.target.style.backgroundColor
-    const rgbArray = bgColor.slice(5,-1).split(",").map(n => parseFloat(n));
-    if (rgbArray[0] !== 0 || rgbArray[1] !== 0 || rgbArray[2] !== 0) {
-      e.target.style.backgroundColor = "rgba(0,0,0,0.1)";
-      e.target.style.border = "rgba(0,0,0,0.1)";
-      return;
+    let rgbArray;
+    let alpha;
+    if (bgColor.slice(0,4) === 'rgba') {
+      // console.log('rgba');
+      rgbArray = bgColor.slice(5,-1).split(",").map(n => parseFloat(n));
+      // console.log('rgba: ' + rgbArray)
     }
-    let alpha = rgbArray[3];
-    if (alpha === 'undefined') {
+    else if (bgColor.slice(0,3) === 'rgb') {
+      // console.log('rgb');
+      rgbArray = bgColor.slice(4,-1).split(",").map(n => parseFloat(n));
+      // console.log('rgb: ' + rgbArray)
+    }
+
+    if (rgbArray[0]===255) {
       alpha = 0.1;
     }
-    else if (alpha < 1.0) {
-      alpha = alpha + 0.1;
+    else if (rgbArray[3] < 1.0) {
+      alpha = rgbArray[3] + 0.1;
+    }
+    else if (rgbArray[3] < 1.0) {
+      // bg is greyscale
+      alpha = alpha = 0.1;
+    }
+    else {
+      alpha = 1.0;
     }
 
     e.target.style.backgroundColor = `rgba(0,0,0,${alpha})`;
@@ -80,6 +93,7 @@ function createGrid(size) {
     for (let j=0; j<size; j++) {
       const gridElement = document.createElement('div');
       gridElement.style.border = "1px solid white";
+      gridElement.style.backgroundColor = "rgb(255,255,255)";
       gridElement.classList.add('gridElement');
       gridElement.style.boxSizing = "border-box";
       gridElement.style.width = `${cellSize}px`;
