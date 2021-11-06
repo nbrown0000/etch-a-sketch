@@ -135,6 +135,7 @@ function changeGridSize(newSize) {
 }
 
 function updateRange(val) {
+  document.querySelector('#grid-size').value = val;
   document.querySelector('#rangeValue').value = "Grid Size: " + val;
 }
 
