@@ -83,7 +83,6 @@ function createGrid(size) {
   currentColor = colorPicker.value;
 
   const gridBoxSize = 500;
-  // gridbox border 1px
   const cellSize = (gridBoxSize - 2) / size;
 
   const grid = document.createElement('div');
@@ -91,8 +90,8 @@ function createGrid(size) {
   grid.style.border = "1px solid white";
   grid.style.width = `${gridBoxSize}px`;
   grid.style.height = `${gridBoxSize}px`;
-  grid.style.display = "flex";
-  grid.style.flexWrap = "wrap";
+  grid.style.display = "grid";
+  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   grid.addEventListener('mouseleave', () => { down = false; })
 
   for (let i=0; i<size; i++) {
@@ -101,9 +100,6 @@ function createGrid(size) {
       gridElement.style.border = "1px solid white";
       gridElement.style.backgroundColor = "rgb(255,255,255)";
       gridElement.classList.add('gridElement');
-      gridElement.style.boxSizing = "border-box";
-      gridElement.style.width = `${cellSize}px`;
-      gridElement.style.height = `${cellSize}px`;
       gridElement.addEventListener('mouseenter', mouseEnter);
       gridElement.addEventListener('click', draw);
       gridElement.addEventListener('mousedown', () => { down = true })
