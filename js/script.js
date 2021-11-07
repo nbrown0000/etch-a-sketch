@@ -11,6 +11,9 @@ const eraserButton = document.querySelector('#eraser-button');
 const sizeSlider = document.querySelector('#grid-size');
 const clearButton = document.querySelector('#clear-button');
 
+gridContainer.addEventListener('mousedown', () => { down = true })
+gridContainer.addEventListener('mouseup', () => { down = false })
+gridContainer.addEventListener('mouseleave', () => { down = false })
 colorPicker.addEventListener('change', (e) => setCurrentColor(e.target.value))
 colorButton.addEventListener('click', () => setCurrentMode('color'));
 rainbowButton.addEventListener('click', () => setCurrentMode('rainbow'));
@@ -18,11 +21,6 @@ greyscaleButton.addEventListener('click', () => setCurrentMode('greyscale'));
 eraserButton.addEventListener('click', () => setCurrentMode('eraser'));
 sizeSlider.addEventListener('change', (e) => changeGridSize(e.target.value))
 clearButton.addEventListener('click', clearGrid)
-
-function mouseEnter(e) {
-  if (!down) { return };
-  draw(e);
-}
 
 function draw(e) {
   if (currentMode === 'color') {
@@ -68,6 +66,7 @@ function draw(e) {
     else {
       alpha = 0.1;
     }
+    console.log(alpha)
 
     e.target.style.backgroundColor = `rgba(0,0,0,${alpha})`;
     e.target.style.border = `rgba(0,0,0,${alpha})`;
@@ -76,6 +75,11 @@ function draw(e) {
     e.target.style.backgroundColor = `rgba(255,255,255)`;
     e.target.style.border = `rgba(255,255,255)`;
   }
+}
+
+function mouseEnter(e) {
+  if (!down) { return };
+  draw(e);
 }
 
 function createGrid(size) {
@@ -92,7 +96,6 @@ function createGrid(size) {
   grid.style.height = `${gridBoxSize}px`;
   grid.style.display = "grid";
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  grid.addEventListener('mouseleave', () => { down = false; })
 
   for (let i=0; i<size; i++) {
     for (let j=0; j<size; j++) {
@@ -102,8 +105,6 @@ function createGrid(size) {
       gridElement.classList.add('gridElement');
       gridElement.addEventListener('mouseenter', mouseEnter);
       gridElement.addEventListener('click', draw);
-      gridElement.addEventListener('mousedown', () => { down = true })
-      gridElement.addEventListener('mouseup', () => { down = false })
       grid.appendChild(gridElement);
     }
   }

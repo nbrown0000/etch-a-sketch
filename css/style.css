@@ -33,6 +33,10 @@ header h1 {
 }
 
 #grid-container {
+  padding: 40px;
+}
+
+.grid {
   background-color: white;
 }
 
